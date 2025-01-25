@@ -1,12 +1,13 @@
 {
 	"folders": [
 		{
-			"path": ".."
-		},
-		{
 			"name": "robo",
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"modes,cpp": "cpp"
+		}
+	}
 }
