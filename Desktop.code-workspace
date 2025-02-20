@@ -1,12 +1,7 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		},
-		{
-			"name": "robo",
-			"path": "."
-		}
-	],
-	"settings": {}
+    "folders": [
+        {
+            "path": "."
+        }
+    ]
 }
