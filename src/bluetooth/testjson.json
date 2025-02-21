@@ -1,0 +1,30 @@
+{
+
+    
+    "mode": "sdffd",
+
+    "params": {
+        "color": [255,555,555],
+        "speed": 222,
+        "strange_thing": 13,
+        "base_color_hue": 255,
+        "value_min": 22,
+        "value_max": 22,
+
+        "palette": [
+            [255, 0, 0], 
+            [0, 255, 0],
+            [0, 0, 255],   
+            [255, 255, 0],
+            [0, 255, 255],
+            [255, 0, 255]
+        ],
+
+        "freeqency": 44,
+        "fade_time": 33,
+        "lenght": 33,
+        "noise_scale": 55,
+        "blur": 22
+        
+    }
+}

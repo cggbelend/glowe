@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include <ArduinoLog.h>
-#include <FastLED.h>
 #include <config.h>
 #include <leds.cpp>
 #include <buttons.cpp>
+#include <bluetooth/bluetooth.cpp>
 
 // put function declarations here:
 
@@ -21,6 +21,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   Buttons::FwdBtn.read();
   Buttons::BwdBtn.read();
+  bluetooth::listen();
 }
 
 // put function definitions here:

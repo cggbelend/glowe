@@ -16,3 +16,6 @@ CRGB leds[LEDS_NUM];
 #define BTN_DOUBLE_CLICK_TIMEOUT 2000 
 // other stuff)
 #define MOTION_S_PIN 3
+
+#define BT_RX 1
+#define BT_TX 1

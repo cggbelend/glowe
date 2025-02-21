@@ -2,6 +2,7 @@
 #include <config.h>
 #include <Arduino.h>
 #include <ArduinoLog.h>
+#include <bluetooth/parser.cpp>
 namespace ledstripp
 {
     void begin(){
@@ -25,7 +26,7 @@ namespace ledstripp
         Log.info("init was SUCKsefull :)))");
 }
 
-    void rainbow(uint16_t speed = 1){
+    void rainbow(uint16_t speed = BTParer::jsonDoc["params"]["speed"]){
         uint8_t hue;
 
         for (size_t i = 0; i < LEDS_NUM; i++)
@@ -38,7 +39,7 @@ namespace ledstripp
 
     }
 
-    void moving_rainbow(uint16_t speed = 1, int strange_thing = 13){
+    void moving_rainbow(uint16_t speed = BTParer::jsonDoc["params"]["speed"], int strange_thing = BTParer::jsonDoc["params"]["strange_thing"]){
         uint8_t hue;
 
         for (size_t i = 0; i < LEDS_NUM; i++)
@@ -53,7 +54,7 @@ namespace ledstripp
         }
     }
 
-    void random_gradient(int base_color_hue = 50, int value_min = 3, int value_max = 253){
+    void random_gradient(int base_color_hue = BTParer::jsonDoc["params"]["base_color_hue"], int value_min = BTParer::jsonDoc["params"]["value_min"], int value_max = BTParer::jsonDoc["params"]["value_max"]){
         leds[0] = CHSV(base_color_hue, random8(), random8(value_min, value_max));
 
         for (int i = LEDS_NUM - 1; i > 0; i--){
@@ -67,7 +68,7 @@ namespace ledstripp
         fill_palette(leds, LEDS_NUM, 0, 255/LEDS_NUM, palete, brightness,LINEARBLEND);
     }
 
-    void moving_palette(CRGBPalette16 palete, uint8_t brightness, uint16_t speed){
+    void moving_palette(CRGBPalette16 palete, uint8_t brightness, uint16_t speed = BTParer::jsonDoc["params"]["speed"]){
         int palette_index;
 
         fill_palette(leds, LEDS_NUM, palette_index, 255/LEDS_NUM, palete, brightness,LINEARBLEND);
@@ -76,7 +77,7 @@ namespace ledstripp
         FastLED.show();
     }
 
-    void fading_palette(CRGBPalette16 palette, uint16_t freeqency, uint16_t fade_time){
+    void fading_palette(CRGBPalette16 palette = BTParer::jsonDoc["params"]["palette"], uint16_t freeqency = BTParer::jsonDoc["params"]["freeqency"], uint16_t fade_time = BTParer::jsonDoc["params"]["fade_time"]){
 
         EVERY_N_MILLISECONDS (freeqency) {
 
@@ -89,7 +90,7 @@ namespace ledstripp
             FastLED.show();
             }
 
-    void kometa(uint8_t speed = 1, uint8_t lenght = 15, uint8_t noise_scale = 30, uint8_t blur = 10){
+    void kometa(uint16_t speed = BTParer::jsonDoc["params"]["speed"], uint8_t lenght = BTParer::jsonDoc["params"]["lenght"], uint8_t noise_scale = BTParer::jsonDoc["params"]["noise_scale"], uint8_t blur = BTParer::jsonDoc["params"]["blur"]){
         for (int i = 0; i < LEDS_NUM; i++)
         {
             uint8_t pos = map(beat8(speed, 0), 0, 255, 0, LEDS_NUM -1);

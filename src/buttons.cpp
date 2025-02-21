@@ -88,15 +88,14 @@ namespace Buttons
         void Begin(){
             pinMode(FWD_BTN_PIN, INPUT);
             pinMode(BWD_BTN_PIN,INPUT);
-
             FwdBtn.begin();
             BwdBtn.begin();
-
+            Log.infoln("buttons began");
             FwdBtn.onPressed(counter::increment);
             BwdBtn.onPressed(counter::decrement);
 
             FwdBtn.onSequence(2, BTN_DOUBLE_CLICK_TIMEOUT, counter::Last);
             BwdBtn.onSequence(2, BTN_DOUBLE_CLICK_TIMEOUT, counter::first);
-
+            Log.traceln("callbacks asigned");
         }
 }
