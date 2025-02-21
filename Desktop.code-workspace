@@ -1,7 +1,13 @@
 {
-    "folders": [
-        {
-            "path": "."
-        }
-    ]
+	"folders": [
+		{
+			"name": "robo",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"modes,cpp": "cpp"
+		}
+	}
 }

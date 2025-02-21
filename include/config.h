@@ -1,32 +1,21 @@
 #include <FastLED.h>
 
-namespace config
-{
-    namespace leds
-    {
-        const extern uint8_t PIN = 3;
-        const extern uint8_t NUM = 8;
-        const extern ESPIChipsets TYPE = WS2801;
-        extern CRGB LEDSS[NUM];
-    } // namespace leds
+// leds
+#define LEDS_NUM 30
+#define LEDS_PIN 6
+#define LEDS_TYPE WS2812B
+CRGB leds[LEDS_NUM];
 
-    namespace buttons
-    {
-        const extern uint8_t FWD_PIN = 3;
-        const extern uint8_t BWD_PIN = 3;
-    } // namespace buttons
-    
-    namespace light
-    {
-        const extern int MIN_TRESHOLD;
-        const extern int MAX_TRESHOLD;
-    } // namespace light
-    
-    namespace bluetooth
-    {
-        const extern uint8_t RX;
-        const extern uint8_t TX;
-    } // namespace bluetooth
-    
-    
-} // namespace config
+// light sensor
+#define LIGHT_S_PIN 5
+#define LIGHT_TRESHHOLD 2
+
+//buttons
+#define FWD_BTN_PIN 3
+#define BWD_BTN_PIN 3
+#define BTN_DOUBLE_CLICK_TIMEOUT 2000 
+// other stuff)
+#define MOTION_S_PIN 3
+
+#define BT_RX 1
+#define BT_TX 1

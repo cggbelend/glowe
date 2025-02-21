@@ -1,16 +1,24 @@
 #include <Arduino.h>
 #include <ArduinoLog.h>
-#include <leds.h>
-#include <buttons.h>
+#include <config.h>
+#include <leds.cpp>
+#include <buttons.cpp>
+#include <bluetooth/bluetooth.cpp>
+
+// put function declarations here:
+
 
 void setup() {
-Serial.begin(9600);
-Log.begin(LOG_LEVEL_VERBOSE, &Serial);
-buttons::begin;
-leds::Begin();
+  // put your setup code here, to run once:
+   Serial.begin(9600);
+  Log.begin(LOG_LEVEL_VERBOSE, &Serial);
+  Buttons::Begin();
+  ledstripp::begin();
+
 }
 
 void loop() {
-buttons::update(150);
+  // put your main code here, to run repeatedly:
+    bluetooth::listen();
 }
 

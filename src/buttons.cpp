@@ -1,84 +1,101 @@
 #include <EasyButton.h>
-#include <ArduinoLog.h>
-#include <leds.h>
 #include <config.h>
-#include <buttons.h>
+#include <leds.cpp>
+#include <ArduinoLog.h>
+#include <Arduino.h>
 
-namespace buttons
+
+namespace Buttons
 {
-    EasyButton FwdBtn(config::buttons::FWD_PIN);
-    EasyButton BwdBtn(config::buttons::BWD_PIN);
-
-    void begin(){
-        FwdBtn.begin();
-        BwdBtn.begin();
-        Log.infoln("buttons began");
-
-        FwdBtn.onPressed(counter::increment);
-        BwdBtn.onPressed(counter::decrement);
-        Log.infoln("button callbacks set");
-    }
-
-    void update(uint16_t baudrate){
-        EVERY_N_MILLISECONDS(baudrate){
-            FwdBtn.read();
-            BwdBtn.read();
-        }
-    }
-
-    namespace counter
-    {
-        uint8_t counter;
-
-        void decrement(){
-            counter --;
-            Log.traceln("counter decremeted");
-            H_CounterCheck();
-
-            ChangeMode();
-        }
-
-        void increment(){
-            counter ++;
-            Log.traceln("counter incremeted");
-            H_CounterCheck();
-
-            ChangeMode();
-        }
-
-        void H_CounterCheck(){
-            if (counter > leds::ModesCount - 1)
-            {
-                Log.traceln("counter is bigger than 3, setting to 0");
-                counter = 0;
-            }
-        }
-
-    } // namespace counter
-        void ChangeMode(){
+        void change_mode(){
             switch (counter::counter)
             {
             case 0:
-                leds::color_wipe();
-                Log.infoln("Mode changed to color_wipe");
+                ledstripp::rainbow;
+                Log.infoln("mode swiched to rainbow");
                 break;
 
             case 1:
-                leds::fade();
-                Log.infoln("Mode changed to fade");
+                ledstripp::moving_rainbow;
+                Log.infoln("mode swiched to moving_rainbow");
+                break;
 
             case 2:
-                leds::rainbow();
-                Log.infoln("Mode changed to rainbow");
+                ledstripp::random_gradient;
+                Log.infoln("mode swiched to random_gradient");
+                break;
 
             case 3:
-                leds::twinkle();
-                Log.infoln("Mode changed to twinkle");
-            
+                ledstripp::moving_palette;
+                Log.infoln("mode swiched to moving_palette");
+                break;
+            case 4:
+                ledstripp::kometa;
+                Log.infoln("mode swiched to kometa");
+                break;
+
             default:
-                Log.fatalln("invalid counter value of buttons::counter::counter");
+                Log.fatalln("fatal error: Couldn't handle that case of a swich of change_mode function in /robo/src/buttons.cpp");
                 break;
             }
         }
     
-} // namespace buttons
+    namespace counter{
+
+        uint8_t counter;
+
+        void increment(){
+            counter::counter ++;
+            Log.noticeln("counter incremented");
+            Buttons::change_mode();
+
+
+            if (counter::counter > ledstripp::count)
+            {
+                counter::first();
+                Buttons::change_mode();
+            }
+            
+        }
+
+        void decrement(){
+            counter::counter --;
+            Log.noticeln("counter decremented");
+
+            if (counter::counter < 0)
+            {
+                counter::Last();
+            }
+            Buttons::change_mode();
+        }
+
+        void Last(){
+        counter::counter = ledstripp::count;
+        Log.noticeln("counter = %d", counter::counter);
+        Buttons::change_mode();
+    }
+
+        void first(){
+            counter::counter = 0;
+            Log.noticeln("counter reseted");
+            Buttons::change_mode();
+        }
+    }
+
+        EasyButton FwdBtn(FWD_BTN_PIN);
+        EasyButton BwdBtn(BWD_BTN_PIN);
+
+        void Begin(){
+            pinMode(FWD_BTN_PIN, INPUT);
+            pinMode(BWD_BTN_PIN,INPUT);
+            FwdBtn.begin();
+            BwdBtn.begin();
+            Log.infoln("buttons began");
+            FwdBtn.onPressed(counter::increment);
+            BwdBtn.onPressed(counter::decrement);
+
+            FwdBtn.onSequence(2, BTN_DOUBLE_CLICK_TIMEOUT, counter::Last);
+            BwdBtn.onSequence(2, BTN_DOUBLE_CLICK_TIMEOUT, counter::first);
+            Log.traceln("callbacks asigned");
+        }
+}

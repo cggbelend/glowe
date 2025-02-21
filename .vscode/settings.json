@@ -1,3 +1,9 @@
 {
+<<<<<<< HEAD
     "C_Cpp.default.compilerPath": "C:/Users/User/.platformio/packages/toolchain-atmelavr/bin/avr-gcc.exe"
+=======
+    "files.associations": {
+        "*.natvis": "cpp"
+    }
+>>>>>>> develop
 }
