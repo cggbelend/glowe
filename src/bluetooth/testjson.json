@@ -26,5 +26,9 @@
         "noise_scale": 55,
         "blur": 22
         
-    }
+    },
+
+"inputs": {
+"light_sensor_mode": "hgh"
+}
 }
