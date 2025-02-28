@@ -2,7 +2,7 @@
 #include <config.h>
 #include <Arduino.h>
 #include <ArduinoLog.h>
-#include <bluetooth/parser.h>
+#include <bluetooth/parser.cpp>
 #include "leds.h"
 namespace ledstripp
 {

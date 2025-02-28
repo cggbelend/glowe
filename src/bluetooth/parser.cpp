@@ -1,11 +1,10 @@
 #include <ArduinoJson.h>
 #include <ArduinoLog.h>
 #include <leds.h>
-#include "bluetooth/parser.h"
 
 namespace BTParer
 {
-
+    StaticJsonDocument <100> jsonDoc;
     void deserialize(char* msg){
         DeserializationError err = deserializeJson(jsonDoc, msg);
 

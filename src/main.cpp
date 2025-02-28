@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include <ArduinoLog.h>
 #include <config.h>
-#include <leds.cpp>
-#include <bluetooth/bluetooth.cpp>
+#include <leds.h>
+#include <bluetooth/bluetooth.h>
 
 // put function declarations here:
 

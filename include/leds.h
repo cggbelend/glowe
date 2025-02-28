@@ -1,5 +1,5 @@
 #include <FastLED.h>
-#include <bluetooth/parser.h>
+#include <bluetooth/parser.cpp>
 
 #pragma once
 namespace ledstripp
